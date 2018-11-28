@@ -4,7 +4,6 @@ const path = require('path');
 const fs = require('fs');
 const defaultArgs = require('./args');
 const {cleanupTempFiles} = require('./cleanup');
-const download = require('../example/download');
 
 module.exports.defaultArgs = defaultArgs;
 

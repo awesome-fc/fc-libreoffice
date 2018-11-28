@@ -5,7 +5,9 @@ mkdir -p tmp/
 
 cp example.docx tmp/
 
-source "`dirname \"$0\"`"/../.env
+SCRIPT_DIR=`dirname -- "$0"`
+
+source $SCRIPT_DIR/../.env
 
 docker run --rm -v $(pwd):/code -v $(pwd)/tmp:/tmp \
     -e FC_ACCESS_KEY_ID=$FC_ACCESS_KEY_ID \
