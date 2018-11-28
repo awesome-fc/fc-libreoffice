@@ -1,8 +1,10 @@
 const {unpack} = require('@shelf/aws-lambda-brotli-unpacker');
 const {execSync} = require('child_process');
 const path = require('path');
+const fs = require('fs');
 const defaultArgs = require('./args');
 const {cleanupTempFiles} = require('./cleanup');
+const download = require('../example/download');
 
 module.exports.defaultArgs = defaultArgs;
 
@@ -10,9 +12,12 @@ const inputPath = path.join(__dirname, '..', 'bin', 'lo.tar.br');
 const outputPath = '/tmp/instdir/program/soffice';
 
 // see https://github.com/alixaxel/chrome-aws-lambda
-module.exports.getExecutablePath = async function() {
+module.exports.getExecutablePath = async function(binPath) {
   cleanupTempFiles();
-  return unpack({inputPath, outputPath});
+  if(!binPath){
+    binPath = inputPath;
+  }
+  return unpack({ binPath , outputPath});
 };
 
 /**
@@ -20,14 +25,14 @@ module.exports.getExecutablePath = async function() {
  * @param {String} filePath Absolute path to file to convert located in /tmp directory
  * @return {Promise<String>} Logs from spawning LibreOffice process
  */
-module.exports.convertFileToPDF = async function(filePath) {
-  const binary = await module.exports.getExecutablePath();
+module.exports.convertFileToPDF = async function(filePath, binPath) {
+  const binary = await module.exports.getExecutablePath(binPath);
 
   const logs = execSync(
     `cd /tmp && ${binary} ${defaultArgs.join(' ')} --convert-to pdf --outdir /tmp ${filePath}`
   );
 
-  execSync(`rm /tmp/${filePath}`);
+  execSync(`cd /tmp && rm ${filePath}`);
 
   return logs.toString('utf8');
 };
