@@ -1,6 +1,8 @@
 # fc-libreoffice
 
-fc-libreoffice 是一个开箱即用的 word 转 pdf NPM 包。在 [fc-docker](https://github.com/aliyun/fc-docker) 提供的 runtime-nodejs8 环境下编译，并且进行了精简，采用了压缩比最高的 Brotli 工具进行打包，最终压缩包大小为 84 M。这个大小仍然超过了 FC 50M 的代码包限制，所以采用 OSS 运行时下载并解压的方式制作了 example 工程。example 工程提供了方便的 Makefile 脚本，集成了 [fun](https://github.com/aliyun/fun) ，简单配置后可以快捷部署。
+fc-libreoffice 是一个开箱即用的 word 转 pdf NPM 包。
+
+在 [fc-docker](https://github.com/aliyun/fc-docker) 提供的 runtime-nodejs8 环境下编译，并且进行了精简，采用了压缩比最高的 Brotli 工具进行打包，最终压缩包大小为 84 M。这个大小仍然超过了 FC 50M 的代码包限制，所以采用 OSS 运行时下载并解压的方式制作了 example 工程。example 工程提供了方便的 Makefile 脚本，集成了 [fun](https://github.com/aliyun/fun) ，简单配置后可以快捷部署。
 
 ## 安装
 
