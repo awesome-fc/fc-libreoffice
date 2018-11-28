@@ -1,10 +1,6 @@
 #!/bin/bash
 set -o xtrace
 
-mkdir -p tmp/
-
-cp example.docx tmp/
-
 SCRIPT_DIR=`dirname -- "$0"`
 
 source $SCRIPT_DIR/../.env
