@@ -1,10 +1,16 @@
 const { convertFileToPDF } = require('fc-libreoffice');
-var co = require('co');
+const co = require('co');
 const OSS = require('ali-oss');
+const fs = require('fs');
 
 const binPath = '/tmp/lo.tar.br';
 
 module.exports.initializer = (context, callback) => {
+
+    if (fs.existsSync(binPath) === true) {
+        callback(null, "already downloaded.");
+        return;
+    }
 
     const store = new OSS({
         region: process.env.LIBREOFFICE_REGION,
