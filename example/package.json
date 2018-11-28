@@ -1,15 +1,14 @@
 {
-  "name": "fc-libreoffice",
+  "name": "libreoffice-example",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@shelf/aws-lambda-brotli-unpacker": "0.0.2",
-    "del": "^3.0.0"
+    "fc-libreoffice": "github:awesome-fc/fc-libreoffice#master"
   }
 }
