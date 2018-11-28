@@ -13,10 +13,7 @@ const outputPath = '/tmp/instdir/program/soffice';
 // see https://github.com/alixaxel/chrome-aws-lambda
 module.exports.getExecutablePath = async function(binPath) {
   cleanupTempFiles();
-  if(!binPath){
-    binPath = inputPath;
-  }
-  return unpack({ binPath , outputPath});
+  return unpack({ inputPath: (binPath ? binPath: inputPath) , outputPath});
 };
 
 /**
