@@ -3,8 +3,14 @@
 clean:
 	bin/clean.sh
 
-build:
+build: clean
 	bin/build.sh
 
-run:
-	bin/run.sh
+deploy: build
+	bin/deploy.sh
+
+invoke:
+	bin/invoke.sh
+
+download:
+	bin/download.sh

@@ -4,3 +4,5 @@ tmp/
 usr/
 .env
 package-lock.json
+template.yml
+example.pdf

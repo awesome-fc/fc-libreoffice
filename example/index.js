@@ -11,11 +11,12 @@ var store;
 module.exports.initializer = (context, callback) => {
 
     store = new OSS({
-        region: process.env.LIBREOFFICE_REGION,
-        bucket: process.env.LIBREOFFICE_BUCKET,
+        region: `oss-${process.env.ALIBABA_CLOUD_DEFAULT_REGION}`,
+        bucket: process.env.OSS_BUCKET,
         accessKeyId: context.credentials.accessKeyId,
         accessKeySecret: context.credentials.accessKeySecret,
-        stsToken: context.credentials.securityToken
+        stsToken: context.credentials.securityToken,
+        internal: process.env.OSS_INTERNAL === 'true'
     });
 
     if (fs.existsSync(binPath) === true) {
@@ -31,16 +32,20 @@ module.exports.initializer = (context, callback) => {
 };
 
 module.exports.handler = (event, context, callback) => {
-    execSync('cp /code/example.docx /tmp/example.docx');
+    execSync('cp -f /code/example.docx /tmp/example.docx');
 
     convertFileToPDF('/tmp/example.docx', binPath)
         .then(() => {
+            console.log('convert success.');
             co(store.put('example.pdf', '/tmp/example.pdf'))
                 .then((val) => callback(null, val))
                 .catch((err) => callback(err));
         })
-        .catch((e) =>
+        .catch((e) => {
+            console.log('convert success.');
             callback(e, 'fail')
+        }
+            
         );
 
 };

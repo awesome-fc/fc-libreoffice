@@ -1,5 +1,4 @@
 #!/bin/bash
-set -o xtrace
 
 [ ! "$(docker ps -a | grep libreoffice-builder)" ] &&  docker run --rm --name libreoffice-builder -t -d -v $(pwd):/code --entrypoint /bin/sh aliyunfc/runtime-nodejs8
 
@@ -13,13 +12,13 @@ SCRIPT_DIR=`dirname -- "$0"`
 source $SCRIPT_DIR/../.env
 
 UPLOADED=0
-if ossutil ls oss://${LIBREOFFICE_BUCKET}/lo.tar.br -e ${LIBREOFFICE_REGION}.aliyuncs.com -i ${FC_ACCESS_KEY_ID} -k ${FC_ACCESS_KEY_SECRET}  | grep "Object Number is: 1" > /dev/null ; then
+if ossutil ls oss://${OSS_BUCKET}/lo.tar.br -e oss-${ALIBABA_CLOUD_DEFAULT_REGION}.aliyuncs.com -i ${ALIBABA_CLOUD_ACCESS_KEY_ID} -k ${ALIBABA_CLOUD_ACCESS_KEY_SECRET}  | grep "Object Number is: 1" > /dev/null ; then
     echo "lo.tar.br is already uploaded!"
     UPLOADED=1
 fi
 
-[ ! $UPLOADED ] && ossutil cp $SCRIPT_DIR/../node_modules/fc-libreoffice/bin/lo.tar.br oss://${LIBREOFFICE_BUCKET}/lo.tar.br \
-     -i ${FC_ACCESS_KEY_ID} -k ${FC_ACCESS_KEY_SECRET} -e ${LIBREOFFICE_REGION}.aliyuncs.com -f
+[ ! $UPLOADED ] && ossutil cp $SCRIPT_DIR/../node_modules/fc-libreoffice/bin/lo.tar.br oss://${OSS_BUCKET}/lo.tar.br \
+     -i ${ALIBABA_CLOUD_ACCESS_KEY_ID} -k ${ALIBABA_CLOUD_ACCESS_KEY_SECRET} -e oss-${ALIBABA_CLOUD_DEFAULT_REGION}.aliyuncs.com -f
 
 rm -f "`dirname \"$0\"`"/../node_modules/fc-libreoffice/bin/lo.tar.br
 
