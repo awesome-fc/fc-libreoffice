@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "@shelf/aws-lambda-brotli-unpacker": "0.0.2",
-    "del": "^3.0.0",
+    "del": "^3.0.0"
   }
 }
