@@ -1,6 +1,6 @@
 # fc-libreoffice
 
-**注意** 下面借助于 OSS 解压的方法已经不推荐，仅供学习而保留，对于大文件和依赖目前更推荐 NAS 方案，希望快速上手请移步 https://github.com/vangie/libreoffice-example
+**注意: 下面借助于 OSS 解压的方法已经不推荐，仅供学习而保留，对于大文件和依赖目前更推荐 NAS 方案，希望快速上手请移步 https://github.com/vangie/libreoffice-example**
 
 fc-libreoffice 是一个开箱即用的 word 转 pdf NPM 包。
 
